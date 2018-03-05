@@ -2,7 +2,6 @@
 
 namespace Kasparsu\PrettyXml;
 
-
 class Prettyfier
 {
     /**
@@ -21,6 +20,7 @@ class Prettyfier
     {
         $this->indentation = $indentation;
         $this->contents = $contents;
+        $this->parser = new XmlParser($contents);
     }
 
     /**
@@ -53,5 +53,8 @@ class Prettyfier
     public function setIndentation($indentation)
     {
         $this->indentation = $indentation;
+    }
+
+    public function prettify(){
     }
 }
