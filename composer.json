@@ -1,5 +1,5 @@
 {
-    "name": "kasparsu/prettyxml",
+    "name": "Kasparsu/PrettyXml",
     "description": "small xml prettyfier that uses no libs",
     "keywords": ["xml", "prettyfier", "nolibs", "beautifier"],
     "license": "WTFPL v2",
@@ -12,7 +12,7 @@
     },
     "autoload": {
         "psr-4": {
-            "kasparsu\\prettyXml\\": "src/"
+            "Kasparsu\\PrettyXml\\": "src/"
         }
     },
     "autoload-dev": {
