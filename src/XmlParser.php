@@ -20,4 +20,20 @@ class XmlParser
     public function parse(){
 
     }
+
+    /**
+     * @return string
+     */
+    public function getXml()
+    {
+        return $this->xml;
+    }
+
+    /**
+     * @param string $xml
+     */
+    public function setXml($xml)
+    {
+        $this->xml = $xml;
+    }
 }
