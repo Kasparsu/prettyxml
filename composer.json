@@ -1,5 +1,5 @@
 {
-    "name": "Kasparsu/PrettyXml",
+    "name": "kasparsu/prettyxml",
     "description": "small xml prettyfier that uses no libs",
     "keywords": ["xml", "prettyfier", "nolibs", "beautifier"],
     "license": "WTFPL v2",
