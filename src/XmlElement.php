@@ -24,6 +24,9 @@ class XmlElement
      */
     private $attributes = [];
 
+    /**
+     * @var string
+     */
     private $value = "";
 
     /**
