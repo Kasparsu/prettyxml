@@ -9,8 +9,7 @@
 namespace Kasparsu\PrettyXml;
 
 
-class XmlElement
-{
+class XmlElement {
     /**
      * @var string
      */
@@ -35,8 +34,7 @@ class XmlElement
      * @param array $children
      * @param array $attributes
      */
-    public function __construct(string $tag, array $children = [], array $attributes = [])
-    {
+    public function __construct(string $tag, array $children = [], array $attributes = []) {
         $this->tag = $tag;
         $this->children = $children;
         $this->attributes = $attributes;
@@ -45,56 +43,49 @@ class XmlElement
     /**
      * @return string
      */
-    public function getTag(): string
-    {
+    public function getTag(): string {
         return $this->tag;
     }
 
     /**
      * @return array
      */
-    public function getChildren(): array
-    {
+    public function getChildren(): array {
         return $this->children;
     }
 
     /**
      * @return array
      */
-    public function getAttributes(): array
-    {
+    public function getAttributes(): array {
         return $this->attributes;
     }
 
     /**
      * @param array $children
      */
-    public function setChildren(array $children)
-    {
+    public function setChildren(array $children): void {
         $this->children = $children;
     }
 
     /**
      * @param array $attributes
      */
-    public function setAttributes(array $attributes)
-    {
+    public function setAttributes(array $attributes): void {
         $this->attributes = $attributes;
     }
 
     /**
      * @return string
      */
-    public function getValue(): string
-    {
+    public function getValue(): string {
         return $this->value;
     }
 
     /**
      * @param string $value
      */
-    public function setValue(string $value)
-    {
+    public function setValue(string $value): void {
         $this->value = $value;
     }
 
