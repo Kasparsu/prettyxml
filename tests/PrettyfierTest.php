@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class PrettyfierTest extends TestCase {
 
     /**
-     * @dataProvider PrettyfierProvider
+     * @dataProvider prettyfierProvider
      */
     public function testIfPrettifierWorksCorrectly($xml, $indentation, $expectedOutput) {
         $prettyfier = new Prettyfier($xml, $indentation);
@@ -18,7 +18,7 @@ class PrettyfierTest extends TestCase {
     /**
      * @return array
      */
-    public function PrettyfierProvider(): array {
+    public function prettyfierProvider(): array {
         return [
             'one tag only' => ['<test></test>', "\t", "<test/>"],
             'exercise example' => [
