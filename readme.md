@@ -56,3 +56,9 @@ to run examples
     docker-compose exec app php example/example3mb.php
     
     docker-compose exec app php example/example200kb.php
+    
+#To Do
+
+- cover all functionality with tests
+- cover more edge cases with code
+- use simpleXml instead of this
