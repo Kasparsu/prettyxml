@@ -1,6 +1,8 @@
 # kasparsu/prettyxml
 
-Xml prettifier that uses no libs or packages
+Xml prettifier that uses no libs or packages. 
+
+####DISCLAIMER: This is in development and if you have any sense or reason you will not use this package!
 
 ## Installation
 
@@ -36,3 +38,21 @@ The code above yields the output below:
        <ci>x</ci>
 </apply>
 ```
+
+### Development
+
+You can run docker enviroment using
+
+    docker-compose up -d
+    
+to run tests use 
+
+    docker-compose exec app vendor/bin/phpunit
+    
+to run examples 
+
+    docker-compose exec app php example/example.php
+    
+    docker-compose exec app php example/example3mb.php
+    
+    docker-compose exec app php example/example200kb.php
