@@ -19,6 +19,7 @@ class XmlParser {
      * @param $xml string
      */
     public function __construct($xml = '') {
+        ini_set('pcre.backtrack_limit', '15728640');
         $this->xml = $xml;
     }
 
@@ -84,7 +85,7 @@ class XmlParser {
      * @param $xml
      * @return string
      */
-    private function getFirstTag($xml): string {
+    public function getFirstTag($xml): string {
         preg_match("/<(\w[^(><.)]*) ?.*>/", $xml, $elements);
         return explode(' ', $elements[1])[0];
     }
@@ -125,26 +126,28 @@ class XmlParser {
      * @param $xml
      * @return XmlElement[]
      */
-    private function getChildren($xml): array {
+    public function getChildren($xml): array {
         $childTags = [];
         while (strlen($xml) > 0) {
-
             $tag = $this->getFirstTag($xml);
             if ($tag == "") {
                 break;
             }
             $childTags[] = new XmlElement($tag);
-            $xml = preg_replace("/<$tag(.*)<\/$tag>/", "", $xml);
+            $xml = $this->removeTagFromXml($tag, $xml);
         }
         return $childTags;
     }
-
+    public function removeTagFromXml($tag, $xml){
+        preg_match('/<' . $tag . '[^(><)]+ ?\/>|<' .$tag.'.*?>(.*?)<\/'.$tag.'>/', $xml, $match);
+        return str_replace($match[0], '', $xml);
+    }
     /**
      * will recursively fill in children elements and their data.
      * @param array $elements
      * @param $parentInnerXml
      */
-    private function getChildrenData(Array $elements, $parentInnerXml): void {
+    public function getChildrenData(Array $elements, $parentInnerXml): void {
         foreach ($elements as $element) {
             $tag = $element->getTag();
             $elementXml = $this->getXmlBetweenTag($tag, $parentInnerXml);
@@ -152,9 +155,7 @@ class XmlParser {
             if (count($children) == 0) {
                 $element->setValue($elementXml);
             } else {
-
                 $element->setChildren($children);
-
                 $this->getChildrenData($children, $elementXml);
             }
             $attributes = $this->getFirstTagAttributes($parentInnerXml);
