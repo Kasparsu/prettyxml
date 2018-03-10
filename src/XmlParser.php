@@ -86,7 +86,7 @@ class XmlParser {
      * @return string
      */
     public function getFirstTag($xml): string {
-        preg_match("/<(\w[^(><.)]*) ?.*>/", $xml, $elements);
+        preg_match("/<(\w[^(><.\/)]*) ?.*>/", $xml, $elements);
         return explode(' ', $elements[1])[0];
     }
 

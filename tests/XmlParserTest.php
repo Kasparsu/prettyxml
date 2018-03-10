@@ -75,6 +75,25 @@ final class XmlParserTest extends TestCase {
     }
 
     /**
+     * @dataProvider firstTagFunctionProvider
+     */
+    public function testFirstTagFunction($xml, $expectedTag){
+       $this->assertEquals($expectedTag, $this->xmlParser->getFirstTag($xml));
+    }
+
+    /**
+     * @return array
+     */
+    public function firstTagFunctionProvider() {
+        return [
+            'one tag only' => ['<test></test>', 'test'],
+            'exercise example' => ['<csymbol encoding="OpenMath"><msub><mi>P</mi><mn>1</mn></msub></csymbol><ci>x</ci>', 'csymbol'],
+            'shorthand' => ['<short/>', 'short'],
+            'shorthand attributes' => ['<short encoding="OpenMath"/>', 'short'],
+        ];
+    }
+
+    /**
      * @return array
      */
     public function xmlFirstElementProvider() {

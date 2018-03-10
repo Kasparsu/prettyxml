@@ -20,7 +20,7 @@ class PrettyfierTest extends TestCase {
      */
     public function PrettyfierProvider(): array {
         return [
-            'one tag only' => ['<test></test>', "\t", "<test>\n</test>"],
+            'one tag only' => ['<test></test>', "\t", "<test/>"],
             'exercise example' => [
                 '<apply><csymbol encoding="OpenMath"><msub><mi>P</mi><mn>1</mn></msub></csymbol><ci>x</ci></apply>',
                 "\t",
@@ -33,7 +33,7 @@ class PrettyfierTest extends TestCase {
             ],
             'buggy' => ['<namespaces><namespace key="-2" case="first-letter">Media</namespace><namespace key="-1" case="first-letter">Special</namespace><namespace key="0" case="first-letter" /><namespace key="1" case="first-letter">Talk</namespace></namespaces>',
             "\t",
-            '']
+            "<namespaces>\n\t<namespace key=\"-2\" case=\"first-letter\">Media</namespace>\n\t<namespace key=\"-1\" case=\"first-letter\">Special</namespace>\n\t<namespace key=\"0\" case=\"first-letter\"/>\n\t<namespace key=\"1\" case=\"first-letter\">Talk</namespace>\n</namespaces>"]
         ];
     }
 }
