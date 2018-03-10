@@ -31,6 +31,9 @@ class PrettyfierTest extends TestCase {
                 '    ',
                 "<test>\n    <a>a</a>\n    <b>b</b>\n    <n>c</n>\n</test>"
             ],
+            'buggy' => ['<namespaces><namespace key="-2" case="first-letter">Media</namespace><namespace key="-1" case="first-letter">Special</namespace><namespace key="0" case="first-letter" /><namespace key="1" case="first-letter">Talk</namespace></namespaces>',
+            "\t",
+            '']
         ];
     }
 }
