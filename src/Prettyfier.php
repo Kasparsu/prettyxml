@@ -78,6 +78,9 @@ class Prettyfier {
                 $output .= $value;
             }
         }
+        if($element->getValue() == "" && $element->getChildren() == []){
+           return $output .= "/>";
+        }
         $output .= ">";
         foreach ($element->getChildren() as $child) {
             $output = $this->createFormatedXmlFromElement($child, $output, $level + 1);

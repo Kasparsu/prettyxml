@@ -41,7 +41,7 @@ class XmlParser {
      * @param $xml
      * @return $this
      */
-    public function setXml($xml): object {
+    public function setXml($xml): XmlParser {
         $this->xml = $xml;
         return $this;
     }
@@ -94,14 +94,17 @@ class XmlParser {
      * @param $xml
      * @return array
      */
-    private function getFirstTagAttributes($xml): array {
-        preg_match("/<(\w[^(><.)]+) ?.*>/", $xml, $elements);
+    public function getFirstTagAttributes($xml): array {
+
+        preg_match("/<(\w[^(><)]+) ?.*>/", $xml, $elements);
         $tagParts = explode(' ', $elements[1]);
         unset($tagParts[0]);
         $attributes = [];
         foreach ($tagParts as $attribute) {
-            preg_match("/(\w*)=\"?(\w*)\"?/", $attribute, $attributeParts);
-            $attributes[$attributeParts[1]] = $attributeParts[2];
+                preg_match("/(.*[^=])=\"?(.*[^\"])\"?/", $attribute, $attributeParts);
+                if($attributeParts != NULL || $attributeParts[2] != NULL) {
+                    $attributes[$attributeParts[1]] = $attributeParts[2];
+                }
         }
         return $attributes;
     }
@@ -112,9 +115,9 @@ class XmlParser {
      * @param string $xml
      * @return string
      */
-    private function getXmlBetweenTag(string $tag, string $xml): string {
-        preg_match("/<$tag.*?>(.*)<\/$tag>/", $xml, $matches);
-        return $matches[1];
+    public function getXmlBetweenTag(string $tag, string $xml): string {
+        preg_match('/<' . $tag . '[^(><.)]+ ?\/>|<' .$tag.'.*?>(.*?)<\/'.$tag.'>/', $xml, $matches);
+        return $matches[1] ??  "";
     }
 
     /**
@@ -149,11 +152,14 @@ class XmlParser {
             if (count($children) == 0) {
                 $element->setValue($elementXml);
             } else {
-                $attributes = $this->getFirstTagAttributes($parentInnerXml);
+
                 $element->setChildren($children);
-                $element->setAttributes($attributes);
+
                 $this->getChildrenData($children, $elementXml);
             }
+            $attributes = $this->getFirstTagAttributes($parentInnerXml);
+            $element->setAttributes($attributes);
+            $parentInnerXml = $this->removeTagFromXml($tag, $parentInnerXml);
         }
     }
 }
